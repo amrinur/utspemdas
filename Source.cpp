@@ -8,20 +8,21 @@
 
 
 #include <iostream>
-#include <cmath>
+#include <cmath>        // libary untuk operasi matematika
 #include <string>
-#include <algorithm>
-#include <vector>
+#include <algorithm>    // libary untuk fungsi sort
+#include <vector>       // libary untuk tipe data vector
 
 using namespace std;
 
+//untuk menyimpan informasi nama dan rata-rata nilai mahasiswa.
 struct Mahasiswa
 {
     string nama;
     double average;
 };
 
-//mengurutkan rata rata dari tertinggi ke terendah
+//fungsi untuk membandingkan nilai rata-rata mahasiswa untuk digunakan pada fungsi sort.
 bool compare(Mahasiswa a, Mahasiswa b)
 {
     return (a.average > b.average);
@@ -35,21 +36,23 @@ int main()
 
     cout << "Masukkan Banyak Mahasiswa: ";
     cin >> bykmhs;
-    cin.ignore();
+    cin.ignore(); //mengabaikan karakter pada input sebelumbnya
 
-    Mahasiswa* mhs = new Mahasiswa[bykmhs];
+    // inisialisasi array Mahasiswa.
+    Mahasiswa* mhs = new Mahasiswa[bykmhs]; 
 
     cout << "Masukkan Banyak Matkul: ";
     cin >> bykmatkul;
     cin.ignore();
 
-    // input mata kuliah
+   // agar namamatkul dapat menyimpan input mata kuliah dari user
     vector<string> namamatkul;
 
+    // input mata kuliah
     for (int k = 0; k < bykmatkul; k++) {
         string matkul;
         cout << "Masukkan nama mata kuliah ke- " << k + 1 << ": ";
-        getline(cin, matkul);
+        getline(cin, matkul); //input nama mata kuliah
         namamatkul.push_back(matkul);
     }
 
@@ -57,7 +60,7 @@ int main()
     for (int j = 0; j < bykmhs; j++) {
         sum = 0;
         cout << "\n\t\tMasukkan Nama Mahasiswa ke " << j + 1 << " : ";
-        getline(cin, mhs[j].nama);
+        getline(cin, mhs[j].nama); // input nama mahasiswa
 
         // input nilai
         for (int i = 0; i < bykmatkul; i++) {
@@ -65,8 +68,9 @@ int main()
             cin >> nilaimatkul;
             cin.ignore();
             sum += nilaimatkul;
-            mhs[j].average = sum / bykmatkul;
+            mhs[j].average = sum / bykmatkul; //menghitung rata rata
 
+            // mencari nilai terbesar dan terkecil
             if (nilaimatkul > nilaitertinggi) {
                 nilaitertinggi = nilaimatkul;
             }
@@ -79,6 +83,8 @@ int main()
         // hasil inputan
         cout << "Total Nilai " << mhs[j].nama << " : " << sum << endl;
         cout << "Rata Rata Nilai " << nama << " : " << mhs[j].average << endl;
+
+        // output Grade nilai mahasiswa
         if (mhs[j].average >= 90) {
             cout << "Nilai rata-rata " << mhs[j].nama << " termasuk kategori 'A'" << endl;
         }
@@ -92,7 +98,7 @@ int main()
             cout << "Nilai rata-rata " << mhs[j].nama << " termasuk kategori 'D'" << endl;
         }
 
-        // max min nilai
+        // output max min nilai
         cout << "Nilai Terendah " << mhs[j].nama << " : " << nilaiterkecil << endl;
         cout << "Nilai Tertinggi " << mhs[j].nama << " : " << nilaitertinggi << endl;
 
